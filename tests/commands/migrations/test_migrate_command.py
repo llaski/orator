@@ -64,7 +64,7 @@ class MigrateCommandTestCase(OratorCommandTestCase):
         command.should_receive("_get_config").and_return({})
         command.should_receive("confirm").and_return(True)
 
-        self.run_command(command, [("--pretend", True)])
+        self.run_command(command, "--pretend")
 
     def test_migration_database_can_be_set(self):
         resolver = flexmock(DatabaseManager)
@@ -85,7 +85,7 @@ class MigrateCommandTestCase(OratorCommandTestCase):
             "migrate:install", [("--database", "foo"), ("--config", None)]
         )
 
-        self.run_command(command, [("--database", "foo")])
+        self.run_command(command, "--database=foo")
 
     def test_migration_can_be_forced(self):
         resolver = flexmock(DatabaseManager)
@@ -102,4 +102,4 @@ class MigrateCommandTestCase(OratorCommandTestCase):
         command = flexmock(MigrateCommand())
         command.should_receive("_get_config").and_return({})
 
-        self.run_command(command, [("--force", True)])
+        self.run_command(command, "--force")

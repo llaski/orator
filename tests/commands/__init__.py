@@ -9,22 +9,19 @@ class OratorCommandTestCase(OratorTestCase):
     def tearDown(self):
         flexmock_teardown()
 
-    def run_command(self, command, options=None):
+    def run_command(self, command, args='', **options):
         """
         Run the command.
 
         :type command: cleo.commands.command.Command
-        :type options: list or None
+        :type args: str
+        :type options: dict
         """
-        if options is None:
-            options = []
-
-        options = [("command", command.get_name())] + options
-
+        
         application = Application()
         application.add(command)
 
         command_tester = CommandTester(command)
-        command_tester.execute(options)
+        command_tester.execute(args, **options)
 
         return command_tester
